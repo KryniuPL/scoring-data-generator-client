@@ -9,7 +9,7 @@ import {useState} from "react";
 
 const initialRange = {min: 0, max: 0};
 
-export const FormStepper = ({initializeGenerator}) => {
+export const FormStepper = ({initializeGenerator, setShowSuccess, setShowError, setErrorMessage}) => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [accountsRange, setAccountsRange] = useState(initialRange)
@@ -31,9 +31,18 @@ export const FormStepper = ({initializeGenerator}) => {
         initializeGenerator({
             accountsRange,
             paymentsRange,
-            producersNumber
-        });
+        })
+            .then(() => setShowSuccess(true))
+            .catch((error) => {
+                setShowError(true)
+                setErrorMessage(error.message)
+                handleReset()
+            });
     }
+
+    const handleReset = () => {
+        setActiveStep(0);
+    };
 
     return (
         <Box sx={{maxWidth: 400}}>

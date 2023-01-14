@@ -26,7 +26,7 @@ export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
     const onMaxChange = (event) => {
         const max = parseInt(event.target.value);
 
-        if (max === 0 || isNaN(max) || max > 10) {
+        if (max === 0 || isNaN(max) || max > 5) {
             setMaxInputError(true);
         } else {
             setMaxInputError(false)
@@ -36,6 +36,9 @@ export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
 
     const continueHandler = () => {
         const {min, max} = accountsRange;
+        if(maxInputError || minInputError) {
+            return;
+        }
         if (min === 0 || min > max) {
             setMinInputError(true);
         }
@@ -78,7 +81,7 @@ export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
                             placeholder="Max"
                             inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
                             onChange={onMaxChange}
-                            helperText={maxInputError ? "Wrong entry, max number is 10, it has to be greater than min" : undefined}
+                            helperText={maxInputError ? "Wrong entry, max number is 5, it has to be greater than min" : undefined}
                         />
                     </div>
 

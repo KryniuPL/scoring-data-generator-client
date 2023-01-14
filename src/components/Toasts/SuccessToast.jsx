@@ -1,8 +1,6 @@
 import * as React from 'react';
 
 import Snackbar from '@mui/material/Snackbar';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
 import {Alert} from "@mui/material";
 
 export const SuccessToast = () => {

@@ -10,23 +10,23 @@ import DataThresholdingIcon from '@mui/icons-material/DataThresholding';
 const pages = [
     {
         name: 'Documentation',
-        link: 'da'
+        link: 'https://github.com/KryniuPL/scoring-data-generator'
     },
     {
         name: 'Github',
-        link: 'ss'
+        link: 'https://github.com/KryniuPL/scoring-data-generator'
     },
     {
         name: 'Author',
-        link: 'd'
+        link: 'https://www.linkedin.com/in/chris-dragan/'
     },
     {
         name: 'Kafka UI',
-        link: 'f'
+        link: 'http://localhost:8080/'
     },
     {
         name: 'Kafka OWL',
-        link: 'dd'
+        link: 'http://localhost:9000/'
     },
 ];
 

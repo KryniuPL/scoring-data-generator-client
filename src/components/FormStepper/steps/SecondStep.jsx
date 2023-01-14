@@ -35,6 +35,9 @@ export const SecondStep = ({handleNext, handleBack, paymentsRange, setPaymentsRa
 
     const continueHandler = () => {
         const {min, max} = paymentsRange;
+        if(maxInputError || minInputError) {
+            return;
+        }
         if (min === 0 || min > max) {
             setMinInputError(true);
         }

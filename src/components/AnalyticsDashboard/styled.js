@@ -10,3 +10,4 @@ export const AnalyticsDashboardWrapper = styled(Card)`
     margin: 50px 50px 50px 0px;
     background-color: rgb(34, 43, 54) !important;
 `
+

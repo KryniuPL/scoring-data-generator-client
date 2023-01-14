@@ -4,18 +4,24 @@ import {AnalyticsDashboard} from "../AnalyticsDashboard";
 import {useState} from "react";
 import axios from "axios";
 
+const headers = {
+    'Content-Type': 'application/json',
+}
+
 export const Content = () => {
     const [showSuccess, setShowSuccess] = useState(false);
 
     const initializeGenerator = (dataGenerationRequest) => {
-        axios.post('/api/initialize', dataGenerationRequest)
-            .then(response => console.log(response))
-        setShowSuccess(true)
+        return axios.post('/api/init', JSON.stringify(dataGenerationRequest), { headers });
     }
 
     return (
         <ContentWrapper>
-            <GenerationForm showSuccess={showSuccess} initializeGenerator={initializeGenerator}/>
+            <GenerationForm
+                showSuccess={showSuccess}
+                setShowSuccess={setShowSuccess}
+                initializeGenerator={initializeGenerator}
+            />
             <AnalyticsDashboard startDisplaying={showSuccess}/>
         </ContentWrapper>
     )

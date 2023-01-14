@@ -1,18 +1,15 @@
-import {Box, CircularProgress} from "@mui/material";
+import {Box} from "@mui/material";
 import {AnalyticsDashboardWrapper} from "./styled";
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import {ScoringChart} from "../ScoringChart";
 
-export const AnalyticsDashboard = ({startDisplaying}) => (
-    <AnalyticsDashboardWrapper>
-        {startDisplaying ? <BenchPlaceholder/> : <Loader/>}
-    </AnalyticsDashboardWrapper>
-)
-
-const BenchPlaceholder = () => (
-    <Box sx={{display: 'flex'}}>
-        <CircularProgress sx={{height: '100px !important', width: '100px !important'}}/>
-    </Box>
-)
+export const AnalyticsDashboard = ({startDisplaying}) => {
+    return (
+        <AnalyticsDashboardWrapper>
+            {startDisplaying ? <ScoringChart/> : <Loader/>}
+        </AnalyticsDashboardWrapper>
+    )
+}
 
 const Loader = () => (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
