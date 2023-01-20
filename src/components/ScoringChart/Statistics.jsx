@@ -2,7 +2,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import {ScoringResultWrapper, StatisticsWrapper} from "./styled";
 import Slider from '@mui/material/Slider';
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 
 const headers = {
@@ -14,17 +14,30 @@ function valuetext(value) {
 }
 
 export const Statistics = () => {
-    const [acceptedScore, setAcceptedScore] = useState(250);
     const [scoringStats, setScoringStats] = useState({scoresAbove: 0.00, scoredBelow: 0.00})
+    const intervalRef = useRef(null)
 
-    useEffect(() => {
-        setInterval(() => {
-            axios.get(`/api/scoring/scoreRatio/${acceptedScore}`, {headers})
+    const onSliderChange = (e) => {
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            axios.get(`/api/scoring/scoreRatio/${e.target.value}`, {headers})
                 .then(res => {
                     setScoringStats(res.data)
                 })
                 .catch(err => console.error(err))
-        }, 1000)
+        }, 5000);
+    }
+
+    useEffect(() => {
+        intervalRef.current = setInterval(() => {
+            axios.get(`/api/scoring/scoreRatio/250`, {headers})
+                .then(res => setScoringStats(res.data))
+                .catch(err => console.error(err))
+        }, 5000);
+
+        return () => {
+            clearInterval(intervalRef.current);
+        };
     }, [])
 
     return (
@@ -33,14 +46,14 @@ export const Statistics = () => {
                 Accept scoring with value greather or equal to:
                 <Slider
                     aria-label="Temperature"
-                    defaultValue={acceptedScore}
+                    defaultValue={250}
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     step={50}
                     marks
                     min={0}
                     max={600}
-                    onChange={e => setAcceptedScore(e.target.value)}
+                    onChange={onSliderChange}
                 />
             </div>
             <div style={{display: 'flex', flexDirection: 'row'}}>
