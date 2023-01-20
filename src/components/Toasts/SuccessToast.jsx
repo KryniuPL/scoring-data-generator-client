@@ -3,7 +3,7 @@ import * as React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import {Alert} from "@mui/material";
 
-export const SuccessToast = () => {
+export const SuccessToast = ({message}) => {
     const [open, setOpen] = React.useState(true);
 
     const handleClose = (event, reason) => {
@@ -17,7 +17,7 @@ export const SuccessToast = () => {
     return (
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Data generation started! Real time date will be provided on the right side
+                {message}
             </Alert>
         </Snackbar>
     )

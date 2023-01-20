@@ -7,7 +7,7 @@ import {FirstStepContentWrapper} from "./styled";
 import {TextField} from "@mui/material";
 import {useState} from "react";
 
-export const ThirdStep = ({handleNext, handleBack, producersNumber, setProducersNumber}) => {
+export const NumberOfInstanceStep = ({handleNext, handleBack, producersNumber, setProducersNumber}) => {
 
     const [showError, setShowError] = useState(false);
 
@@ -34,7 +34,7 @@ export const ThirdStep = ({handleNext, handleBack, producersNumber, setProducers
     return (
         <>
             <StepLabel optional={<Typography variant="caption">Last step</Typography>}>
-                Select number of producer instance
+                Select number of producer instances
             </StepLabel>
             <FirstStepContentWrapper>
                 <Typography>

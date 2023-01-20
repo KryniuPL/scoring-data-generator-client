@@ -47,11 +47,13 @@ export const ScoringChart = () => {
 
 
     useEffect(() => {
+        console.log('rerender')
         const socket = new WebSocket("ws://localhost:8090/api/scoring");
 
         socket.onopen = () => console.log('Socket opened')
         socket.onclose = () => console.log('Socket closed')
         socket.onmessage = (message) => {
+            console.log(message.data)
             const scoring = JSON.parse(message.data);
 
             data.datasets.forEach(dataset => {

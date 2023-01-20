@@ -7,35 +7,34 @@ import {FirstStepContentWrapper} from "./styled";
 import {TextField} from "@mui/material";
 import {useState} from "react";
 
-export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
-
+export const ClientsAgeRangeStep = ({handleNext, clientsAgeRange, setClientsAgeRange}) => {
     const [minInputError, setMinInputError] = useState(false);
     const [maxInputError, setMaxInputError] = useState(false);
 
     const onMinChange = (event) => {
         const min = parseInt(event.target.value);
 
-        if (min === 0 || isNaN(min)) {
+        if (min < 18 || isNaN(min)) {
             setMinInputError(true);
         } else {
             setMinInputError(false)
-            setAccountsRange({...accountsRange, min});
+            setClientsAgeRange({...clientsAgeRange, min});
         }
     }
 
     const onMaxChange = (event) => {
         const max = parseInt(event.target.value);
 
-        if (max === 0 || isNaN(max) || max > 5) {
+        if (max === 0 || isNaN(max) || max > 100) {
             setMaxInputError(true);
         } else {
             setMaxInputError(false)
-            setAccountsRange({...accountsRange, max});
+            setClientsAgeRange({...clientsAgeRange, max});
         }
     }
 
     const continueHandler = () => {
-        const {min, max} = accountsRange;
+        const {min, max} = clientsAgeRange;
         if(maxInputError || minInputError) {
             return;
         }
@@ -55,11 +54,12 @@ export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
     return (
         <>
             <StepLabel>
-                Select number of accounts
+                Select client's age range
             </StepLabel>
             <FirstStepContentWrapper>
                 <Typography>
-                    Select range of accounts for each client. Number of accounts for client will be generated
+                    Select range of possible client's age. Age is an important parameter, martial status scoring or job type scoring will be
+                    calculated based on its value.
                 </Typography>
                 <Box sx={{mb: 2, display: 'flex', flexDirection: 'column'}}>
                     <div>
@@ -71,7 +71,7 @@ export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
                             placeholder="Min"
                             inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
                             onChange={onMinChange}
-                            helperText={minInputError ? "Wrong entry, min number is 1, it has to be smaller than max" : undefined}
+                            helperText={minInputError ? "Wrong entry, min number is 18, it has to be smaller than max" : undefined}
                         />
                         <TextField
                             error={maxInputError}
@@ -81,7 +81,7 @@ export const FirstStep = ({handleNext, accountsRange, setAccountsRange}) => {
                             placeholder="Max"
                             inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
                             onChange={onMaxChange}
-                            helperText={maxInputError ? "Wrong entry, max number is 5, it has to be greater than min" : undefined}
+                            helperText={maxInputError ? "Wrong entry, max number is 100, it has to be greater than min" : undefined}
                         />
                     </div>
 

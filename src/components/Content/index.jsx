@@ -1,7 +1,8 @@
+import * as React from 'react';
 import {ContentWrapper} from "./styled";
 import {GenerationForm} from "../GenerationForm";
 import {AnalyticsDashboard} from "../AnalyticsDashboard";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 const headers = {
@@ -11,8 +12,14 @@ const headers = {
 export const Content = () => {
     const [showSuccess, setShowSuccess] = useState(false);
 
+    useEffect(() => {
+        window.producerId = "";
+        window.generationData = null;
+    }, [])
+
     const initializeGenerator = (dataGenerationRequest) => {
-        return axios.post('/api/init', JSON.stringify(dataGenerationRequest), { headers });
+        window.generationData = dataGenerationRequest;
+        return axios.post('/api/init', JSON.stringify(dataGenerationRequest), {headers});
     }
 
     return (

@@ -7,7 +7,7 @@ import {FirstStepContentWrapper} from "./styled";
 import {TextField} from "@mui/material";
 import {useState} from "react";
 
-export const SecondStep = ({handleNext, handleBack, paymentsRange, setPaymentsRange}) => {
+export const NumberOfPaymentsStep = ({handleNext, handleBack, paymentsRange, setPaymentsRange}) => {
     const [minInputError, setMinInputError] = useState(false);
     const [maxInputError, setMaxInputError] = useState(false);
 
