@@ -1,11 +1,11 @@
 import * as React from 'react';
-import CardContent from '@mui/material/CardContent';
-import {GenerationFormWrapper, StyledCardContent} from "./styled";
+import {CoordinatorWrapper, GenerationFormWrapper, StyledCardContent} from "./styled";
 import {FormStepper} from "../FormStepper";
 import {SuccessToast} from "../Toasts/SuccessToast";
 import {ErrorToast} from "../Toasts/ErrorToast";
 import {useState} from "react";
 import {GenerationCoordinator} from "../GenerationCoordinator";
+import {ScoringCard} from "../ScoringCard";
 
 export const GenerationForm = ({showSuccess, setShowSuccess, initializeGenerator}) => {
     const [showError, setShowError] = useState(false);
@@ -20,7 +20,10 @@ export const GenerationForm = ({showSuccess, setShowSuccess, initializeGenerator
                     setShowSuccess={setShowSuccess}
                     initializeGenerator={initializeGenerator}
                 />
-                {showSuccess && <GenerationCoordinator />}
+                <CoordinatorWrapper>
+                    <ScoringCard/>
+                    {showSuccess && <GenerationCoordinator />}
+                </CoordinatorWrapper>
                 {showSuccess && <SuccessToast message={"Data generation started! Real time date will be provided on the right side"}/>}
                 {showError && <ErrorToast message={errorMessage}/>}
             </StyledCardContent>

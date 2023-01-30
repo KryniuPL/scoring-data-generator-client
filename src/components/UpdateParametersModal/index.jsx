@@ -65,7 +65,10 @@ export const UpdateParametersModal = ({open, setOpen}) => {
     const handleClose = () => setOpen(false);
 
     const approveHandler = () => {
-        return axios.post('/api/update', JSON.stringify(window.generationData), {headers})
+        return axios.post('/api/update', JSON.stringify({
+            ...window.generationData,
+            scoringCardConfig: window.scoringCardConfig
+        }), {headers})
             .then(() => {
                 setOpen(false)
                 setShowSuccess(true)
